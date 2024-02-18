@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Banner from "./componentes/Banner";
 import Formulario from "./componentes/Formulario";
 import Rodape from "./componentes/Rodape";
 import Time from "./componentes/Time";
 import { v4 } from "uuid";
+import { MdVisibilityOff, MdVisibility } from "react-icons/md";
 
 function App() {
   const [times, setTimes] = useState([
@@ -264,7 +265,19 @@ function App() {
     },
   ];
 
-  const [colaboradores, setColaboradores] = useState(inicial);
+  const [colaboradores, setColaboradores] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:8080/colabs")
+      .then((resposta) => resposta.json())
+      .then((data) => {
+        data.map((c) => {
+          c.id = v4();
+          return c;
+        });
+        setColaboradores(data);
+      });
+  }, []);
+  const [isVisible, setVisible] = useState(true);
   const mudarCorDoTime = (cor, id) => {
     setTimes(
       times.map((time) => {
@@ -285,22 +298,41 @@ function App() {
       })
     );
   };
+  const propsVisible = {
+    size: 60,
+    color: "#fff",
+    onClick: (e) => {
+      e.preventDefault();
+      setVisible(!isVisible);
+    },
+  };
   const deletarColaborador = (id) => {
     setColaboradores(colaboradores.filter((c) => c.id !== id));
   };
   return (
     <div>
       <Banner />
-      <Formulario
-        key={Date.now()}
-        times={times.map((time) => time.nome)}
-        aoCadastrar={(colaborador) =>
-          setColaboradores([...colaboradores, colaborador])
-        }
-        aoCadastrarTime={(t) => setTimes([...times, t])}
-      />
+      {isVisible === true && (
+        <Formulario
+          key={Date.now()}
+          times={times.map((time) => time.nome)}
+          aoCadastrar={(colaborador) =>
+            setColaboradores([...colaboradores, colaborador])
+          }
+          aoCadastrarTime={(t) => setTimes([...times, t])}
+        />
+      )}
       <section className="times">
-        <h1>Minha organização</h1>
+        <div className="header">
+          <h1>Minha organização</h1>
+          <div className="visivel">
+            {isVisible ? (
+              <MdVisibility {...propsVisible} />
+            ) : (
+              <MdVisibilityOff {...propsVisible} />
+            )}
+          </div>
+        </div>
         {times.map((time, indice) => (
           <Time
             mudarFavorito={mudarFavorito}

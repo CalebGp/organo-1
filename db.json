@@ -1,0 +1,32 @@
+{
+  "colabs": [
+    {
+      "nome": "Caleb Pinto",
+      "favorito": true,
+      "cargo": "Developer",
+      "imagem": "https://github.com/calebgp.png",
+      "time": "Mobile"
+    },
+    {
+      "nome": "Caleb Pinto",
+      "favorito": true,
+      "cargo": "Developer",
+      "imagem": "https://github.com/calebgp.png",
+      "time": "Mobile"
+    },
+    {
+      "nome": "Caleb Pinto",
+      "favorito": true,
+      "cargo": "Developer",
+      "imagem": "https://github.com/calebgp.png",
+      "time": "Mobile"
+    },
+    {
+      "favorito": false,
+      "nome": "GUILHERME LIMA",
+      "cargo": "Desenvolvedor Python e JavaScript na Alura",
+      "imagem": "https://www.alura.com.br/assets/img/lideres/guilherme-lima.1647533644.jpeg",
+      "time": "Programação"
+    }
+  ]
+}

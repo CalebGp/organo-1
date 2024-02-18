@@ -26,7 +26,8 @@ const Colaborador = ({ colaborador, corDeFundo, aoDeletar, mudarFavotito }) => {
         <h5>{colaborador.cargo}</h5>
         <div className="favoritar">
           {colaborador.favorito ? (
-            <AiFillHeart {...propsFavorito} color="#ff0000" />
+            <AiFillHeart {...propsFavorito} color="#ff0000
+            " />
           ) : (
             <AiOutlineHeart {...propsFavorito} />
           )}
